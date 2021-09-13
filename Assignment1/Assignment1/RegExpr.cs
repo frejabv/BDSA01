@@ -21,19 +21,22 @@ namespace Assignment1
 
         public static IEnumerable<(int width, int height)> Resolution(string resolutions)
         {
-            //(?<vertical>\d+)(?:x)(?<horizontal>\d+)
                 foreach (Match match in Regex.Matches(resolutions, @"(?<horizontal>\d+)"+@"(?:x)"+@"(?<vertical>\d+)"))
                 {   
                     var width = Int32.Parse(match.Groups["horizontal"].Value);
                     var height = Int32.Parse(match.Groups["vertical"].Value); 
                     yield return (width, height);
                 } 
-    
         }
 
         public static IEnumerable<string> InnerText(string html, string tag)
         {
-            throw new NotImplementedException();
+            var temp = "(?<tag>"+tag+")";   
+            string pattern = @"(?:<"+temp+".*?)(?<=>)(?:<.+>)*(?<text>.*?)(?:</.+>)*(?=</\\k<tag>)";  
+            foreach (Match match in Regex.Matches(html, pattern)) 
+            {
+                yield return match.Groups["text"].Value;
+            }
         }
     
     }
