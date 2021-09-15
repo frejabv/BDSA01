@@ -1,3 +1,4 @@
+using System.Collections;
 using System; 
 using System.Collections.Generic;
 using Xunit;
@@ -38,16 +39,43 @@ namespace Assignment1.Tests
             Assert.Equal(expectedOutput, RegExpr.SplitLine(input));
         }
     
-        [Fact]
-        public void Resolution_given_1_string_of_8_resolutions_returns_8_tuples()
+        [Fact] 
+        public void Resolution_given_4_strings_of_8_resolutions_returns_8_tuples()
         {
             //Arrange 
-            var input = "1920x1080 1024x768, 800x600, 640x480 320x200, 320x240, 800x600 1280x960";
+            var input = new List<string>{"1920x1080", "1024x768, 800x600, 640x480", "320x200, 320x240, 800x600", "1280x960"};
             var expectedOutput = new List<(int, int)>{(1920, 1080), (1024, 768), (800, 600), (640, 480), (320, 200), (320, 240), (800, 600), (1280, 960)};
 
             //Act 
             var output = RegExpr.Resolution(input);
 
+            //Assert
+            Assert.Equal(expectedOutput, output); 
+        }
+
+        [Fact] 
+        public void Resolution_given_3_strings_of_5_resolutions_returns_5_tuples()
+        {
+            //Arrange 
+            var input = new List<string>{"2784x274", "28473x9274", "284x2422, 9472x243,1957x2922"};
+            var expectedOutput = new List<(int, int)>{(2784,274), (28473,9274), (284,2422), (9472,243),(1957,2922)};
+
+            //Act 
+            var output = RegExpr.Resolution(input);
+
+            //Assert
+            Assert.Equal(expectedOutput, output); 
+        }
+
+        [Fact] 
+        public void Resolution_given_2_wrong_input_format_returns_3_tuples()
+        {
+            //Arrange 
+            var input = new List<string>{"2784xxxx274", "\n284x", "284x2422,9472x243,,,,,,,,,1957x2922"};
+            var expectedOutput = new List<(int, int)>{(284,2422), (9472,243), (1957,2922)};
+
+            //Act 
+            var output = RegExpr.Resolution(input);
 
             //Assert
             Assert.Equal(expectedOutput, output); 
