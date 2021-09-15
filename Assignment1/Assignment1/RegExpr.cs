@@ -19,7 +19,7 @@ namespace Assignment1
             }
         }
 
-        public static IEnumerable<(int width, int height)> Resolution(IEnumerable<string> resolutions) //should it take an Ienumerable? //string resolutions
+        public static IEnumerable<(int width, int height)> Resolution(IEnumerable<string> resolutions) 
         {
                 foreach (var line in resolutions)
                 { 
