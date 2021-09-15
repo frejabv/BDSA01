@@ -8,7 +8,7 @@ namespace Assignment1.Tests
     public class RegExprTests
     {
         [Fact]
-        public void given2LinesReturns6words() {
+        public void SplitLine_given2LinesReturns6words() {
             // Arrange
             var firstLine = "jeg er mikki";
             var secondLine = "mikki er jeg";
@@ -23,6 +23,22 @@ namespace Assignment1.Tests
             Assert.Equal(expectedOutput, output);
         }
 
+        [Fact]
+        public void SplitLine_given_three_lines_returns_11_single_words() 
+        {
+            var input = new List<string>{"In todays world", "it is not", "uncommon to love Harry Potter"};
+            var expectedOutput = new List<string> {"In", "todays", "world", "it", "is", "not", "uncommon", "to", "love", "Harry", "Potter"};
+            Assert.Equal(expectedOutput, RegExpr.SplitLine(input));
+        }
+
+        [Fact]
+        public void SplitLine_given_two_lines_where_one_is_empty_returns_1_word() 
+        {
+            var input = new List<string>{"Alohomora", ""};
+            var expectedOutput = new List<string> {"Alohomora"}; 
+            Assert.Equal(expectedOutput, RegExpr.SplitLine(input));
+        }
+    
         [Fact] 
         public void Resolution_given_4_strings_of_8_resolutions_returns_8_tuples()
         {
@@ -95,8 +111,20 @@ namespace Assignment1.Tests
             //Assert
             Assert.Equal(expectedOutput, output);
         }
+
+        [Theory]
+        [InlineData("<div><p>The phrase <i>regular <b>expressions</b></i> (and consequently, regexes) is often used to mean the specific, standard textual syntax for representing <u>patterns</u> that matching <em>text</em> need to conform to.</p></div>", "p", "The phrase regular expressions (and consequently, regexes) is often used to mean the specific, standard textual syntax for representing patterns that matching text need to conform to.")]
+        [InlineData("<html>hej <header>jeg <p><i>er</i></p></header></html>","html","hej jeg er")]
+        [InlineData("<html><header><p><i>hej</i></p></header></html>","html","hej")] 
+        public void InnerText_given_html_with_multiple_nestings_returns_all_innertext_without_tags(string html, string tag, string output)
+        {   
+            var expectedOutput = new List<string>{output};
+
+            Assert.Equal(expectedOutput, RegExpr.InnerText(html, tag));
+        }
     
+
+
+
     }
-
-
 }

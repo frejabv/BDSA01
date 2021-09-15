@@ -12,9 +12,9 @@ namespace Assignment1
         {
             foreach (var line in lines)
             {
-                foreach (var word in Regex.Split(line, @"\W"))
+                foreach (var word in Regex.Matches(line, @"\w+"))
                 {
-                    yield return word; 
+                    yield return word.ToString(); 
                 } 
             }
         }
@@ -35,7 +35,7 @@ namespace Assignment1
         public static IEnumerable<string> InnerText(string html, string tag)
         {
             var temp = "(?<tag>"+tag+")";   
-            string pattern = @"(?:<"+temp+".*?)(?<=>)(?:<.+>)*(?<text>.*?)(?:</.+>)*(?=</\\k<tag>)";  
+            string pattern = @"(?:<"+temp+".*?)(?<=>)(?<text>.*?)(?=</\\k<tag>)";  
             foreach (Match match in Regex.Matches(html, pattern)) 
             {
                 yield return Regex.Replace(match.Groups["text"].Value, @"(<.+?>)", "");
