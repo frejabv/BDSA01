@@ -37,7 +37,7 @@ namespace Assignment1.Tests
         public void SplitLine_given_two_lines_where_one_is_empty_returns_1_word() 
         {
             var input = new List<string>{"Alohomora", ""};
-            var expectedOutput = new List<string> {"Alohomora"}; //failer fordi \W inkluderer empty string
+            var expectedOutput = new List<string> {"Alohomora"}; 
             Assert.Equal(expectedOutput, RegExpr.SplitLine(input));
         }
     
