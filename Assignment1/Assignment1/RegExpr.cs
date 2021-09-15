@@ -12,9 +12,9 @@ namespace Assignment1
         {
             foreach (var line in lines)
             {
-                foreach (var word in Regex.Split(line, @"\W"))
+                foreach (var word in Regex.Matches(line, @"\w+"))
                 {
-                    yield return word; 
+                    yield return word.ToString(); 
                 } 
             }
         }

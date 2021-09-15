@@ -32,6 +32,14 @@ namespace Assignment1.Tests
             var expectedOutput = new List<string> {"In", "todays", "world", "it", "is", "not", "uncommon", "to", "love", "Harry", "Potter"};
             Assert.Equal(expectedOutput, RegExpr.SplitLine(input));
         }
+
+        [Fact]
+        public void SplitLine_given_two_lines_where_one_is_empty_returns_1_word() 
+        {
+            var input = new List<string>{"Alohomora", ""};
+            var expectedOutput = new List<string> {"Alohomora"}; //failer fordi \W inkluderer empty string
+            Assert.Equal(expectedOutput, RegExpr.SplitLine(input));
+        }
     
         [Fact]
         public void Resolution_given_1_string_of_8_resolutions_returns_8_tuples()
