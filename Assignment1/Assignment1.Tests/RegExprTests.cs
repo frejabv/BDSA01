@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations;
 using System; 
@@ -9,7 +10,7 @@ namespace Assignment1.Tests
     public class RegExprTests
     {
         [Fact]
-        public void given2LinesReturns6words() {
+        public void SplitLine_given2LinesReturns6words() {
             // Arrange
             var firstLine = "jeg er mikki";
             var secondLine = "mikki er jeg";
@@ -22,6 +23,14 @@ namespace Assignment1.Tests
 
             // Assert
             Assert.Equal(expectedOutput, output);
+        }
+
+        [Fact]
+        public void SplitLine_given_three_lines_returns_11_single_words() 
+        {
+            var input = new List<string>{"In todays world", "it is not", "uncommon to love Harry Potter"};
+            var expectedOutput = new List<string> {"In", "todays", "world", "it", "is", "not", "uncommon", "to", "love", "Harry", "Potter"};
+            Assert.Equal(expectedOutput, RegExpr.SplitLine(input));
         }
     
         [Fact]
@@ -77,8 +86,6 @@ namespace Assignment1.Tests
         public void InnerText_given_html_with_multiple_nestings_returns_all_innertext_without_tags(string html, string tag, string output)
         {   
             var expectedOutput = new List<string>{output};
-
-            //var output = RegExpr.InnerText(html, tag);
 
             Assert.Equal(expectedOutput, RegExpr.InnerText(html, tag));
         }
