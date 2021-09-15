@@ -19,14 +19,17 @@ namespace Assignment1
             }
         }
 
-        public static IEnumerable<(int width, int height)> Resolution(string resolutions)
+        public static IEnumerable<(int width, int height)> Resolution(IEnumerable<string> resolutions) 
         {
-                foreach (Match match in Regex.Matches(resolutions, @"(?<horizontal>\d+)"+@"(?:x)"+@"(?<vertical>\d+)"))
-                {   
-                    var width = Int32.Parse(match.Groups["horizontal"].Value);
-                    var height = Int32.Parse(match.Groups["vertical"].Value); 
-                    yield return (width, height);
-                } 
+                foreach (var line in resolutions)
+                { 
+                    foreach (Match match in Regex.Matches(line, @"(?<horizontal>\d+)"+@"(?:x)"+@"(?<vertical>\d+)"))
+                    {   
+                        var width = Int32.Parse(match.Groups["horizontal"].Value);
+                        var height = Int32.Parse(match.Groups["vertical"].Value); 
+                        yield return (width, height);
+                    } 
+                }
         }
 
         public static IEnumerable<string> InnerText(string html, string tag)
