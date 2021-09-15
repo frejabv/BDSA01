@@ -35,7 +35,7 @@ namespace Assignment1
             string pattern = @"(?:<"+temp+".*?)(?<=>)(?:<.+>)*(?<text>.*?)(?:</.+>)*(?=</\\k<tag>)";  
             foreach (Match match in Regex.Matches(html, pattern)) 
             {
-                yield return match.Groups["text"].Value;
+                yield return Regex.Replace(match.Groups["text"].Value, @"(<.+?>)", "");
             }
         }
     

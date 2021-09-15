@@ -18,8 +18,8 @@ jobs:
         with:
           dotnet version: 5.0.x
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore ./Assignment1/
       - name: Build 
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore ./Assignment1/
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test --no-restore --verbosity normal ./Assignment1/
