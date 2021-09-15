@@ -1,3 +1,5 @@
+using System.Reflection;
+using System.ComponentModel.DataAnnotations;
 using System; 
 using System.Collections.Generic;
 using Xunit;
@@ -67,8 +69,22 @@ namespace Assignment1.Tests
             //Assert
             Assert.Equal(expectedOutput, output);
         }
+
+        [Theory]
+        [InlineData("<div><p>The phrase <i>regular <b>expressions</b></i> (and consequently, regexes) is often used to mean the specific, standard textual syntax for representing <u>patterns</u> that matching <em>text</em> need to conform to.</p></div>", "p", "The phrase regular expressions (and consequently, regexes) is often used to mean the specific, standard textual syntax for representing patterns that matching text need to conform to.")]
+        [InlineData("<html>hej <header>jeg <p><i>er</i></p></header></html>","html","hej jeg er")]
+        [InlineData("<html><header><p><i>hej</i></p></header></html>","html","hej")] 
+        public void InnerText_given_html_with_multiple_nestings_returns_all_innertext_without_tags(string html, string tag, string output)
+        {   
+            var expectedOutput = new List<string>{output};
+
+            //var output = RegExpr.InnerText(html, tag);
+
+            Assert.Equal(expectedOutput, RegExpr.InnerText(html, tag));
+        }
     
+
+
+
     }
-
-
 }

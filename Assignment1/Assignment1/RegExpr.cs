@@ -32,7 +32,7 @@ namespace Assignment1
         public static IEnumerable<string> InnerText(string html, string tag)
         {
             var temp = "(?<tag>"+tag+")";   
-            string pattern = @"(?:<"+temp+".*?)(?<=>)(?:<.+>)*(?<text>.*?)(?:</.+>)*(?=</\\k<tag>)";  
+            string pattern = @"(?:<"+temp+".*?)(?<=>)(?<text>.*?)(?=</\\k<tag>)";  
             foreach (Match match in Regex.Matches(html, pattern)) 
             {
                 yield return Regex.Replace(match.Groups["text"].Value, @"(<.+?>)", "");
